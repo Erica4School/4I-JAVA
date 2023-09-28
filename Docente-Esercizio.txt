@@ -1,0 +1,69 @@
+Domanda 2:
+Scrivere una classe Docente che rappresenti le seguenti informazioni relative ad un docente: nome,
+cognome, codice ed età, e che contenga il costruttore parametrizzato ed i metodi getCodice, getCognome e
+getEta che restituiscono rispettivamente il codice, il cognome e l’età del docente.
+Scrivere poi una classe Universita, che rappresenti un insieme di docenti universitari tramite un array di tipo
+Docente, e che contenga il costruttore parametrizzato ed un metodo etaMinima che restituisce la minima
+età tra i docenti universitari.
+Tempo: 20 minuti
+Soluzione:
+class Docente{
+private String nome;
+private String cognome;
+private int codice;
+private int eta;
+public Docente(String n, String c, int cod, int e){
+nome=n;cognome=c;codice=cod;eta=e;
+}
+public Docente(Docente d){
+nome=d.getNome();
+cognome=d.getCognome();
+codice=d.getCodice();
+eta=d.getEta();
+}//costruttore di copia non richiesto ma implementato perchè usato nella //classe Università
+public String getNome(){
+return nome;
+}//non richiesto ma implementato perchè usato nel costruttore di copia
+public String getCognome(){
+return cognome;
+}
+public int getCodice(){
+return codice;
+}
+public int getEta(){
+return eta;
+}
+}
+class Universita{
+private Docente[] docenti;
+public Universita(Docente[] d){
+docenti=new Docente[d.length];
+for(int i=0;i<d.length;i++)
+docenti[i]=new Docente(d[i]);
+}
+public int etaMinima(){
+int min=docenti[0].getEta();
+for(int i=1;i<=docenti.length;i++)
+if(docenti[i].getEta()<min) min=docenti[i].getEta();
+return min;
+}
+}
+Domanda 3:
+Inserire nella classe Universita il metodo TrovaGiovani che restituisca i cognomi dei docenti che hanno età
+minima.
+Soluzione:
+public String[] trovaGiovani(){
+String [] risultato;
+int cont=0;
+for(int i=0;i<docenti.length;i++)
+if(docenti[i].getEta()==etaMinima()) cont++;
+risultato=new String[cont];
+cont=0;
+for(int i=0;i<docenti.length;i++)
+if(docenti[i].getEta()==etaMinima()){
+risultato[i]=docenti[i].getCognome();
+cont++;
+}
+return risultato;
+}
+Traccia completa svolta su https://www.unirc.it/documentazione/materiale_didattico/1467_2019_483_33365.pdf
